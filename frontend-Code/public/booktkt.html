@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Train Tickets</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Include Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="booktkt.CSS">
+  <style>
+    /* Add custom styles here */
+    body {
+      background-color: #bcddff;
+    }
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="text-center mb-4">Book Train Tickets</h1>
+    <form id="bookingForm">
+        <div class="form-group">
+            <label for="departureStation">FROM</label>
+            <input type="text" class="form-control" id="departureStation" placeholder="Enter departure station" required>
+          </div>
+          <div class="form-group">
+            <label for="arrivalStation">TO</label>
+            <input type="text" class="form-control" id="arrivalStation" placeholder="Enter arrival station" required>
+          </div>
+          <div class="form-group">
+            <label for="trainNumber">TRAIN Number</label>
+            <input type="text" class="form-control" id="trainNumber" placeholder="TRAIN Number" readonly>
+          </div>
+          <div class="form-group">
+            <label for="trainName">TRAIN Name</label>
+            <input type="text" class="form-control" id="trainName" placeholder="TRAIN Name" readonly>
+          </div>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select class="form-control" id="category" required>
+          <option value="">Select category</option>
+          <option value="SC">SC</option>
+          <option value="2A">First Class</option>
+          <option value="3A">Second Class</option>
+          <option value="sleeper">Sleeper</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="text" class="form-control" id="price" placeholder="Price" readonly>
+      </div>
+      <div class="form-group">
+        <label for="departureTime">Departure Time</label>
+        <input type="text" class="form-control" id="departureTime" required>
+      </div>
+      <div class="form-group">
+        <label for="arrivalTime">Arrival Time</label>
+        <input type="text" class="form-control" id="arrivalTime" required>
+      </div>
+      <div class="form-group">
+        <label for="passengerName">Passenger Name</label>
+        <input type="text" class="form-control" id="passengerName" placeholder="Enter passenger name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+      </div>
+      <div class="form-group">
+        <label for="numTickets">Number of Tickets</label>
+        <input type="number" class="form-control" id="numTickets" placeholder="Enter number of tickets" required>
+      </div>
+      <div class="form-group">
+        <label for="seatNumber">Seat Number</label>
+        <input type="text" class="form-control" id="seatNumber" placeholder="Enter seat number(s)" required  >
+      </div>
+      <div class="form-group">
+        <label for="paymentMethod">Select Payment Method:</label>
+        <select id="paymentMethod" name="paymentMethod" class="form-control" required>
+            <option value="card">Credit Card</option>
+            <option value="debit">Debit Card</option>
+        </select><br><br>
+        <label for="cardNumber">Card Number:</label>
+        <input type="text" id="cardNumber" name="cardNumber" maxlength="16" required>
+        <label for="expiryDate">Expiry Date:</label>
+        <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YYYY" pattern="\d{2}/\d{4}" required>
+        <label for="cvv">CVV/CVC:</label>
+        <input type="text" id="cvv" name="cvv" maxlength="3" required>
+         
+      <button id="bookNowButton" type="submit" class="btn btn-primary">Book Now</button>
+    </form>
+    <div id="bookingResultMessage" class="mt-4"></div>
+  </div>
+
+  <!-- Bootstrap JS and any additional scripts go here -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="frontend.js"></script>
+  <script>
+    document.getElementById('bookingForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent the default form submission
+
+  // Gather ticket details
+  const category = document.getElementById('category').value;
+  const departureStation = document.getElementById('departureStation').value;
+  const arrivalStation = document.getElementById('arrivalStation').value;
+  const departureTime = document.getElementById('departureTime').value;
+  const arrivalTime = document.getElementById('arrivalTime').value;
+  const passengerName = document.getElementById('passengerName').value;
+  const email = document.getElementById('email').value;
+  const numTickets = document.getElementById('numTickets').value;
+  const seatNumber = document.getElementById('seatNumber').value;
+  const trainNumber = document.getElementById('trainNumber').value;
+  const trainName = document.getElementById('trainName').value;
+  const price = document.getElementById('price').value;
+
+  // Save ticket details to local storage
+  const ticketDetails = {
+    category,
+    departureStation,
+    arrivalStation,
+    departureTime,
+    arrivalTime,
+    passengerName,
+    email,
+    numTickets,
+    seatNumber,
+    trainNumber,
+    trainName,
+    price
+  };
+
+  localStorage.setItem('ticketDetails', JSON.stringify(ticketDetails));
+
+   
+   
+    window.location.href = 'ticket.html'; // Redirect to ticket.html
+   
+});
+  
+
+// Update price based on number of tickets
+document.getElementById('numTickets').addEventListener('change', function() {
+  const numTickets = parseInt(this.value); // Parse the number of tickets as an integer
+  let price = parseInt(document.getElementById('price').value); // Parse the current price
+
+  if (isNaN(numTickets) || numTickets <= 0) {
+    // Display an error message or handle invalid input
+    alert('Please enter a valid number of tickets.');
+    this.value = ''; // Clear the input field
+    return;
+  }
+
+  // Update price based on the selected category
+  const category = document.getElementById('category').value;
+  switch (category) {
+    case 'SC':
+      price = 180; // Update with actual prices
+      break;
+    case '2A':
+      price = 350;
+      break;
+    case '3A':
+      price = 879;
+      break;
+    case 'sleeper':
+      price = 1250;
+      break;
+    default:
+      price = 0;
+  }
+
+  // Multiply the price by the number of tickets
+  price *= numTickets;
+
+  // Add currency symbol to the price
+  const currencySymbol = '₹'; // Change to the desired currency symbol
+  const formattedPrice = currencySymbol + price.toFixed(2); // Format the price with 2 decimal places and add the currency symbol
+
+  // Update the price input field with the formatted value
+  document.getElementById('price').value = formattedPrice;
+});
+
+
+// Update departure time based on departure station selection
+document.getElementById('departureStation').addEventListener('change', function() {
+  const departureStation = this.value;
+  let departureTime = '';
+
+  switch (departureStation.toLowerCase()) {
+    case 'raichur':
+      departureTime = '08:00 AM';
+      break;
+    case 'bengaluru':
+      departureTime = '04:05 AM';
+      break;
+    case 'mysuru':
+      departureTime = '05:00 AM';
+      break;
+    case 'mantralaya':
+      departureTime = '07:09 AM';
+      break;
+    default:
+      departureTime = '8:15 pm'; // Clear the value for invalid selections
+  }
+
+  document.getElementById('departureTime').value = departureTime;
+});
+
+// Update arrival time based on arrival station selection
+document.getElementById('arrivalStation').addEventListener('change', function() {
+  const arrivalStation = this.value;
+  let arrivalTime = '';
+
+  switch (arrivalStation.toLowerCase()) {
+    case 'raichur':
+      arrivalTime = '10:30 AM';
+      break;
+    case 'bengaluru':
+      arrivalTime = '11:45 PM';
+      break;
+    case 'mysoru':
+      arrivalTime = '06:15 AM';
+      break;
+    case 'mantralaya':
+      arrivalTime = '02:30 PM';
+      break;
+    default:
+      arrivalTime = '7:40 pm'; // Clear the value for invalid selections
+  }
+
+  document.getElementById('arrivalTime').value = arrivalTime;
+});
+ // Update arrival time based on arrival station selection
+document.getElementById('numTickets').addEventListener('change', function() {
+  const numTickets = this.value;
+  let seatNumber = '';
+
+  switch (numTickets.toLowerCase()) {
+    case '1':
+    seatNumber = 'A15';
+      break;
+    case '2':
+    seatNumber = 'A15, A16';
+      break;
+    case '3':
+    seatNumber = 'A3, A4, A5';
+      break;
+    case '4':
+    seatNumber = 'A23, A24, A25, A26';
+      break;
+    default:
+    seatNumber = ''; // Clear the value for invalid selections
+  }
+
+  document.getElementById('seatNumber').value = seatNumber;
+});
+
+    // Update train number based on departure station selection seatNumber
+    document.getElementById('departureStation').addEventListener('change', function() {
+      const departureStation = this.value;
+      let trainNumber = "";
+
+      switch (departureStation) {
+        case 'Raichur':
+          trainNumber = 117036;
+          break;
+        case 'mysoru':
+          trainNumber = 22103;
+          break;
+        case 'bengaluru':
+          trainNumber = 33104;
+          break;
+        case 'mantralyam':
+          trainNumber = 10021;
+          break;
+        case 'yadgiri':
+          trainNumber = 117036;
+          break;
+        case 'kalburgi':
+          trainNumber = 22103;
+          break;
+        case 'hydrabad':
+          trainNumber = 33104;
+          break;
+        case 'munbai':
+          trainNumber = 10021;
+          break;
+        default:
+          trainNumber = "Not Available"; // Set a default value
+      }
+
+
+      document.getElementById('trainNumber').value = trainNumber;
+    });
+    // Update train number based on departure station selection
+    document.getElementById('departureStation').addEventListener('change', function() {
+      const departureStation = this.value;
+      let trainNumber = "";
+
+      switch (departureStation) {
+        case 'Raichur':
+        trainName = 'basava express';
+          break;
+        case 'mysoru':
+        trainName = 'varanasi express';
+          break;
+        case 'bengaluru':
+        trainName = 'bengaluru express';
+          break;
+        case 'mantralyam':
+        trainName = 'raichuru express';
+          break;
+        case 'yadgiri':
+        trainName = 'mumbai express';
+          break;
+        case 'kalburgi':
+        trainName = 'superfast chennai express';
+          break;
+        case 'hydrabad':
+        trainName = 'naveen express';
+          break;
+        case 'mumbai':
+        trainName = 'mumbai express';
+          break;
+        default:
+        trainName = "Not Available"; // Set a default value
+      }
+  
+      document.getElementById('trainName').value = trainName;
+    });
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Train Tracker</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .train-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .train-item {
+        margin-bottom: 10px;
+    }
+
+    .train-link {
+        display: block;
+        padding: 10px;
+        border: 1px solid #1601ff;
+        border-radius: 5px;
+        background-color: #09ffa1;
+        text-decoration: none;
+        color: #333;
+        transition: background-color 0.3s ease;
+    }
+
+    .train-style:hover {
+        background-color: #8f92f5;
+    }
+    .train-style {
+        display: block;
+        padding: 5px;
+        border: 1px solid #1601ff;
+        border-radius: 5px;
+        background-color: #f4fffb;
+        text-decoration: none;
+        color: #333;
+        transition: background-color 0.3s ease;
+    }
+
+
+    .input-group {
+        margin-top: 20px;
+    }
+
+    .input-group input[type="text"] {
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .input-group button[type="submit"] {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #1601ff;
+        color: #fff;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+    <h1>Train Tracker</h1>
+    <h2>Enter your train number</h2>
+    
+    <ul class="train-list">
+        <li class="train-item">
+            <a href="#" class="train-link">Raichur To Mysore super-fast Basava Express 117036</a>
+        </li>
+        <li class="train-item">
+            <a href="#" class="train-link">Mysore to Raichur Express 20034</a>
+        </li>
+        <li class="train-item">
+            <a href="#" class="train-link">Mumbai Express 12343</a>
+        </li>
+    </ul>
+
+    <div class="input-group">
+        <label for="trainNumber"class="train-style">Enter Train Number:</label>
+        <input type="text" id="trainNumber" name="trainNumber" required>
+        <button type="submit" onclick="redirectTrainLocation()">Track Train</button>
+    </div>
+
+    <script>
+        function redirectTrainLocation() {
+            const trainNumber = document.getElementById('trainNumber').value.trim();
+            if (trainNumber !== '') {
+                const trainUrl = getTrainUrl(trainNumber);
+                if (trainUrl) {
+                    window.location.href = trainUrl;
+                } else {
+                    alert('Train number not found.');
+                }
+            } else {
+                alert('Please enter a train number.');
+            }
+        }
+
+        function getTrainUrl(trainNumber) {
+            switch (trainNumber) {
+                case '117036':
+                    return 'rail.html';
+                case '20034':
+                    return 'rail2.html';
+                case '12343':
+                    return 'rail3.html';
+                default:
+                    return null;
+            }
+        }
+    </script>
+</body>
+</html>

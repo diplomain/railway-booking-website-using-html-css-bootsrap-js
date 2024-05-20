@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>track rail</title>
+<style>
+body {
+  background-color: rgb(232, 0, 185);
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 5px;
+  
+}
+ 
+.container {
+  display: flex;
+  gap: 0px;
+  background-color: rgb(114, 144, 144);
+   
+  
+}
+.h1{
+color: #0026ff;
+}
+
+.time {
+  width: 110px; /* Increased width for longer display */
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  background-color: rgb(140, 255, 136);
+  border: 2px solid #ff0000; /* Changed border width and color */
+  border-radius: 10px; /* Increased border radius for a rounded look */
+  font-size: 18px;
+  margin-top: 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box-shadow for depth */
+}
+
+.current-minute::after {
+  
+  content: "\1F686"; /* Bullet symbol after the current minute */
+  margin-left: 5px; /* Adjust spacing as needed */
+  font-size: 100px; /* Customize the symbol size */
+  color: rgb(0, 41, 243); /* Customize the symbol color */
+  margin-top: 50px;
+  animation: moveBullet 300s linear infinite; /* Animation properties */
+}
+
+@keyframes moveBullet {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100vh); }
+}
+.time.different-design {
+  background-color: rgb(134, 134, 134);
+  color: rgb(134, 134, 134);
+  font-weight: bold;
+  width:30px;
+  height: 150px;
+  white-space: 10;
+  border-style: dashed; /* Changed border style to dashed */
+  border-color: #000000; /* Changed border color */
+  border-width: 3px; /* Increased border width */
+  border-radius: 5px; /* Added border radius for rounded corners */
+  box-shadow: 0 2px 4px rgba(17, 255, 0, 0.1); /* Added box-shadow for depth */
+}
+
+
+</style>
+</head>
+<body>
+  <center> 
+  <h1 style="text-align: center; color: #0026ff; background-color: #0055ff;">Welcome to Railway Tracker</h1>
+</center>
+  <img src="image.png" height="200px"width="150">
+  <fieldset style="background-color: #000000; border-style: double;"> 
+<div class="container" id="timeContainer"></div>
+  </fieldset>
+<script>
+  // Create a new heading element
+ var heading = document.createElement("h2");
+
+// Set the text content of the heading
+heading.textContent = "SCROLL To find where is your train..!";
+
+// Append the heading to the body of the document
+document.body.appendChild(heading);
+ 
+document.addEventListener("DOMContentLoaded", () => {
+  const timeContainer = document.getElementById("timeContainer");
+  const now = new Date();
+  const currentHour = now.getHours();
+  const currentMinute = now.getMinutes();
+
+  const stations = [
+   
+    { hour: 7, minute: 0, name: "yadgiri" , km:"0.0km"},
+    { hour: 8, minute: 0, name: "Raichur",km:"35.0km" },
+    { hour: 8, minute: 35, name: "matmari",km:"45.0km" },
+    { hour: 8, minute: 45, name: "matmari" ,km:"50.0km"},
+    { hour: 9, minute: 0, name: "hanumapura" ,km:"60.0km"},
+    { hour: 9, minute: 35, name: "Mantralaym",km:"100.0km" },
+    { hour: 10, minute: 0, name: "kupgal" ,km:"120.0km"},
+    { hour: 10, minute: 45, name: "Adoni",km:"140.0km" },
+    { hour: 11, minute: 0, name: "guntkal",km:"160.0km" },
+    { hour: 11, minute: 45, name: "Anantapuram",km:"200.0km" },
+    { hour: 12, minute: 0, name: "zangalpalle" ,km:"250.0km"},
+    { hour: 12, minute: 35, name: "zangalpalle" ,km:"250.0km"},
+    { hour: 12, minute: 45, name: "Darmavaram" ,km:"340.0km"},
+    { hour: 13, minute: 0, name: "sri sathya sai neelaya",km:"390.0km" },
+    { hour: 13, minute: 45, name: "Hindupura",km:"450.0km" },
+    { hour: 13, minute: 35, name: "devarapalli",km:"470.0km" },
+    { hour: 14, minute: 0, name: "Gauribidanuru",km:"500.0km" },
+    { hour: 14, minute: 35, name: "oddarahalli",km:"570.0km" },
+    { hour: 14, minute: 45, name: "someshwara",km:"590.0km" },
+    { hour: 15, minute: 0, name: "Dodballapura",km:"659.0km" },
+    { hour: 15, minute: 35, name: "yalhanka",km:"690.0km" },
+    { hour: 15, minute: 45, name: "kodige halli",km:"748.0km" },
+    { hour: 16, minute: 0, name: "yaswanth pura" ,km:"790.0km"},
+    { hour: 16, minute: 35, name: "yaswanthpura" ,km:"887.0km"},
+    { hour: 16, minute: 45, name: "yaswanth pura",km:"900.0km" },
+    { hour: 17, minute: 0, name: "KSR BENGALURU",km:"950.0km" },
+    { hour: 17, minute: 35, name: "krishnadevarahalli",km:"980.0km" },
+    { hour: 17, minute: 45, name: "nayandhalli",km:"1012.0km" },
+    { hour: 18, minute: 0, name: "kengeri" ,km:"1034.0km"},
+    { hour: 18, minute: 35, name: "kengeri" ,km:"1034.0km"},
+    { hour: 18, minute: 45, name: "kengeri" ,km:"1034.0km"},
+    { hour: 18, minute: 55, name: "kengeri" ,km:"1034.0km"},
+    { hour: 19, minute: 0, name: "ramnagara",km:"1043.0km" },
+    { hour: 19, minute: 35, name: "settihalli ",km:"1089.0km" },
+    { hour: 19, minute: 45, name: "nidaghatta halt",km:"1108.0km" },
+    { hour: 20, minute: 0, name: "channapatana",km:"1189.0km" },
+    { hour: 20, minute: 35, name: "channapattana",km:"1234.0km" },
+    { hour: 20, minute: 45, name: "channapattana",km:"1234.0km" },
+    { hour: 21, minute: 0, name: "mandya",km:"1267.0km" },
+    { hour: 21, minute: 35, name: "yeliru",km:"1290.0km" },
+    { hour: 21, minute: 45, name: "chandragiri",km:"1324.0km" },
+    { hour: 22, minute: 35, name: "pandavapura" ,km:"1390.0km"},
+    { hour: 22, minute: 35, name: "shrirangapattana",km:"1400.0km" },
+    { hour: 22, minute: 35, name: "naganahalli",km:"1428.0km" },
+    { hour: 23, minute: 0, name: "Mysuru",km:"1490.0km" }
+];
+
+  for (let hour = 0; hour < 24; hour++) {
+    for (let minute = 0; minute < 60; minute++) {
+      const timeDiv = document.createElement("div");
+      timeDiv.classList.add("time");
+      const formattedHour = hour.toString().padStart(2, "0");
+      const formattedMinute = minute.toString().padStart(2, "0");
+      timeDiv.textContent = `${formattedHour}:${formattedMinute}`;
+
+      // Check if the minute falls within the specified ranges
+if (
+  (minute >= 1 && minute <= 34) ||
+  (minute >= 36 && minute <= 44) ||
+  (minute >= 46 && minute <= 59)
+) {
+  timeDiv.classList.add("different-design");
+}
+
+ 
+   
+const station = stations.find(
+  (station) => station.hour === hour && station.minute === minute
+);
+
+if (station) {
+  timeDiv.textContent += `- ${station.name} station ${station.km}`;
+  if (
+    hour === currentHour &&
+    minute === currentMinute &&
+    currentHour >= station.hour &&
+    currentMinute >= station.minute
+  ) {
+    alert(`You're in ${station.name} station!`);
+  }
+}
+
+if (
+  station &&
+  currentHour === station.hour &&
+  currentMinute >= station.minute - 35 &&
+  currentMinute <= station.minute - 2 &&
+  !station.alertShown
+) {
+  alert(`The train will arrive at ${station.name} station in a few minutes!`); // Adjusted message
+  station.alertShown = true; // Set a flag to indicate that the alert has been shown for this station
+}
+
+      if (hour === currentHour && minute === currentMinute) {
+        timeDiv.classList.add("current-time");
+        timeDiv.classList.add("current-minute");
+      }
+      
+      timeContainer.appendChild(timeDiv);
+    }
+  }
+});
+  
+
+
+</script>
+</body>
+</html>

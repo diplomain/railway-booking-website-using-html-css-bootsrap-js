@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <!-- Include CSS stylesheets and other necessary resources -->
+    <link rel="stylesheet" href="pay.css">
+</head>
+<body>
+    <header>
+        <!-- Navigation bar or header content -->
+        <h1>Railway Ticket Booking - Payment</h1>
+    </header>
+    <main>
+        <h2>Payment Information</h2>
+
+        <form id="paymentForm" action="http://localhost:3000/api/processPayment" method="POST">
+          <div class="form-group">
+            <label for="paymentMethod">Select Payment Method:</label>
+            <select id="paymentMethod" name="paymentMethod" class="form-control" required>
+                <option value="card">Credit Card</option>
+                <option value="debit">Debit Card</option>
+            </select><br><br>
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber" maxlength="16" required>
+            <label for="expiryDate">Expiry Date:</label>
+            <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YYYY" pattern="\d{2}/\d{4}" required>
+            <label for="cvv">CVV/CVC:</label>
+            <input type="text" id="cvv" name="cvv" maxlength="3" required>
+            <label for="billingAddress">Billing Address:</label>
+            <textarea id="billingAddress" name="billingAddress" rows="4" required></textarea>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" min="0" step="0.01" required>
+            <!-- Other payment details and options (e.g., payment method selection) -->
+            <button type="submit">Pay Now</button>
+          </div>
+          <div id="paymentMessage"></div>
+        </form>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const cardNumber = document.getElementById('cardNumber').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const cvv = document.getElementById('cvv').value;
+            const billingAddress = document.getElementById('billingAddress').value;
+            const amount = document.getElementById('amount').value;
+
+            if (!validateCardNumber(cardNumber) || !validateExpiryDate(expiryDate) || !validateCVV(cvv)) {
+              document.getElementById('paymentMessage').innerHTML = `
+                <div class="alert alert-danger" role="alert">
+                  Please check your card details.
+                </div>
+              `;
+              return;
+            }
+
+            const data = { cardNumber, expiryDate, cvv, billingAddress, amount };
+
+            // Send payment data to the server for processing
+            axios.post('http://localhost:3000/api/processPayment', data)
+              .then(response => {
+                // Handle response if needed (e.g., show success message, redirect to success page)
+                console.log(response.data);
+                window.location.href = `payment-success.html?amount=${amount}`;
+              })
+              .catch(error => {
+                console.error('Error processing payment:', error);
+                document.getElementById('paymentMessage').innerHTML = `
+                  <div class="alert alert-danger" role="alert">
+                    Payment failed. Please try again later.
+                  </div>
+                `;
+              });
+        });
+
+        // Card number validation function (basic example)
+        function validateCardNumber(cardNumber) {
+          return /^\d{12,16}$/.test(cardNumber); // Assuming 12-16 digit card number format
+        }
+
+        // Expiry date validation function (basic example)
+        function validateExpiryDate(expiryDate) {
+          return /^\d{2}\/\d{4}$/.test(expiryDate); // Assuming MM/YYYY format
+        }
+
+        // CVV validation function (basic example)
+        function validateCVV(cvv) {
+          return /^\d{3,4}$/.test(cvv); // Assuming 3-4 digit CVV format
+        }
+    </script>
+
+    <footer>
+        <!-- Footer content and links -->
+        <p>Contact us at support@railwaybooking.com for assistance.</p>
+    </footer>
+    <!-- Include JavaScript files for form validation or other interactive features -->
+</body>
+</html>

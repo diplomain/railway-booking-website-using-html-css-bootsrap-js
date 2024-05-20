@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Railway Services</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* Custom styles */
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #8d60ff 0%, #ff8fc7 100%);
+    }
+
+    .navbar {
+      background-color: #343a40; /* Dark background color for navbar */
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: #ffffff !important; /* Change navbar brand color to white */
+    }
+    .navbar-nav .nav-item .nav-link:hover {
+      color: #59ff30 !important; /* Change navbar links color on hover */
+    }
+    .navbar-nav .nav-item .nav-link {
+      color: #ffffff !important; /* Change navbar links color to white */
+    }
+
+    .nav-link:hover {
+      background: linear-gradient(to bottom, #8d60ff 0%, #ff8fc7 100%);
+    }
+
+    .card {
+      background-color: #ffffff; /* Card background color */
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Add shadow to cards */
+    }
+
+    .card-title {
+      color: #343a40; /* Card title color */
+    }
+
+    .card-text {
+      color: #666666; /* Card text color */
+    }
+
+    .btn-primary {
+      background-color: #d816ee; /* Primary button color */
+      border-color: #d816ee; /* Primary button border color */
+    }
+
+    .btn-primary:hover {
+      background-color: #02ff06; /* Darker shade of primary color on hover */
+      border-color: #aa00ff; /* Darker shade of primary color on hover */
+    }
+
+    .footer {
+      background-color: #343a40; /* Footer background color */
+      color: #ffffff; /* Footer text color */
+      padding: 20px 0; /* Footer padding */
+    }
+
+    /* Styles for Font Awesome icons */
+    .icon {
+      font-size: 24px; /* Adjust icon size */
+      margin-right: 10px; /* Add space between icon and text */
+      color: #d816ee; /* Icon color */
+    }
+
+    /* Adjust container width for responsiveness */
+    @media (max-width: 768px) {
+      .container {
+        max-width: 100%;
+      }
+    }
+
+    /* Color animation for h1 */
+    @keyframes colorChange {
+      20% {
+        color: #121010;
+      }
+      100% {
+        color: #26ff00;
+      }
+      100% {
+        color: #cc00ff;
+      }
+      75% {
+        color: #e1fe09;
+      }
+      100% {
+        color: #0e0ef7;
+      }
+    }
+
+    .animated-color {
+      animation: colorChange 5s infinite;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Railway</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/FRONTEND/public/home.html">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/FRONTEND/public/services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/FRONTEND/public/about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/FRONTEND/public/contact.html">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/FRONTEND/public/logout.html">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Section -->
+  <div class="container mt-4">
+    <h1 class="mb-4 text-center animated-color">Our Services</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <i class="fas fa-ticket-alt icon mb-3"></i>
+            <h5 class="card-title">Ticket Booking</h5>
+            <p class="card-text">Book your train tickets online hassle-free.</p>
+            <a href="/FRONTEND/public/booktkt.html" class="btn btn-primary">Book Tickets</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <i class="fas fa-train icon mb-3"></i>
+            <h5 class="card-title">Train Schedule</h5>
+            <p class="card-text">View the latest train schedules and routes.</p>
+            <a href="/FRONTEND/public/trainsh.html" class="btn btn-primary">View Schedule</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <i class="fas fa-headset icon mb-3"></i>
+            <h5 class="card-title">Customer Support</h5>
+            <p class="card-text">Get assistance from our dedicated customer support team.</p>
+            <a href="/FRONTEND/public/customer.html" class="btn btn-primary">Contact Support</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <i class="fas fa-ban icon mb-3"></i>
+            <h5 class="card-title">Cancel Booking</h5>
+            <p class="card-text">Cancel your ticket booking.</p>
+            <a href="/FRONTEND/public/cancelebooking.html" class="btn btn-primary">Cancel Booking</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <i class="fas fa-train icon mb-3"></i>
+            <h5 class="card-title">Check Train Updates</h5>
+            <p class="card-text">Check the latest updates about train schedules.</p>
+            <a href="/FRONTEND/public/Train_updates.html" class="btn btn-primary">Check Updates</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container text-center">
+      &copy; 2024 Railway | All Rights Reserved
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS and any additional scripts go here -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

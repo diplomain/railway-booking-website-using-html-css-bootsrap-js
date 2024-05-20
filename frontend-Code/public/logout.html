@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logout</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      padding: 50px;
+      background-size: cover;
+      background: linear-gradient(to bottom, #9b74ff 0%, #ffc3e1 100%);
+    }
+     
+
+    .btn-primary:hover {
+      background-color: #16be00; /* Darker shade of primary color on hover */
+      border-color: #002aff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="/FRONTEND/public/con.jpeg" alt="Railway Image" class="img-fluid mb-3 mx-auto d-block" style="width: 50%;">
+
+    <h1 class="text-center mb-4">Logout Page</h1>
+    <p class="text-center">Are you sure you want to log out?</p>
+    <div class="text-center">
+      <a href="#" class="btn btn-primary" id="logoutBtn">Logout</a>
+    </div>
+    <div id="logoutMessage" class="text-center mt-3" style="display: none;">
+      <p class="text-success" style="background-color: aliceblue;">Logout successful! Redirecting to home page...</p>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and any additional scripts go here -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    document.getElementById('logoutBtn').addEventListener('click', function(event) {
+      event.preventDefault();
+      // Perform logout logic here, such as clearing session data or cookies
+
+      // Display the logout message
+      document.getElementById('logoutMessage').style.display = 'block';
+
+      // Redirect to the home page after a delay
+      setTimeout(function() {
+        window.location.href = '/frontend/public/home2.html';
+      }, 2000); // 2000 milliseconds (2 seconds) delay before redirection
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check Train Updates</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 6px;
+      border: 5px solid #0022ff;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0019f9;
+    }
+
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #00ff2f;
+    }
+  </style>
+</head>
+<body>
+  <h2>Check Train Updates</h2>
+  <form id="trainUpdatesForm">
+    <label for="fromAddress">From:</label>
+    <input type="text" id="fromAddress" name="fromAddress" required><br><br>
+
+    <label for="toAddress">To:</label>
+    <input type="text" id="toAddress" name="toAddress" required><br><br>
+
+    <button type="submit">Check Updates</button>
+  </form>
+
+  <div id="trainUpdatesContainer"></div>
+
+  <!-- JavaScript -->
+  <script>
+    const trainUpdatesForm = document.getElementById('trainUpdatesForm');
+    const trainUpdatesContainer = document.getElementById('trainUpdatesContainer');
+
+    trainUpdatesForm.addEventListener('submit', (e) => {
+      e.preventDefault(); // Prevent the default form submission
+
+      const fromAddress = document.getElementById('fromAddress').value;
+      const toAddress = document.getElementById('toAddress').value;
+
+      fetch('http://localhost:3000/check-updates', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ fromAddress, toAddress }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Clear previous content
+        trainUpdatesContainer.innerHTML = '';
+
+        // Display train updates in the container
+        if (data && data.length > 0) {
+          const updatesList = document.createElement('ul');
+          data.forEach(train => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${train.train_name} - Departure Time: ${train.departure_time}, Arrival Time: ${train.arrival_time}`;
+            updatesList.appendChild(listItem);
+          });
+          trainUpdatesContainer.appendChild(updatesList);
+        } else {
+          trainUpdatesContainer.textContent = 'No train updates found for the given locations.';
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching train updates:', error);
+        trainUpdatesContainer.textContent = 'Error fetching train updates. Please try again later.';
+      });
+    });
+  </script>
+</body>
+</html>

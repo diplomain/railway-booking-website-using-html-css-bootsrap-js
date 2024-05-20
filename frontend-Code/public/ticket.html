@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Ticket</title>
+  <!-- Include required libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode/dist/JsBarcode.all.min.js"></script>
+  <style>
+    /* Add custom styles here */
+    body {
+      font-family: Arial, sans-serif;
+      
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .final {
+      max-width: 500px;
+      
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #e4e4e4;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(4, 252, 45, 0.1);
+    }
+    .ticket {
+      padding: 20px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .ticket h2 {
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 24px;
+      color: #333;
+      align-items: center;
+    }
+    .ticket-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .ticket-details label {
+      font-weight: bold;
+    }
+    .barcode {
+      text-align: center;
+      margin-top: 30px;
+    
+    }
+    #barcodeCanvas {
+      border: 1px solid #333;
+      border-radius: 5px;
+    }
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fffbfb;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #51ff00;
+    }
+    .container {
+     text-align: center;
+
+    }
+    .success-container {
+      align-items: center;
+      text-align: center;
+      max-width: 400px;
+      padding: 20px;
+      border-radius: 8px;
+       
+    }
+    .success-message {
+      
+      border-color: #d6e9c6;
+      color: #3c763d;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+    .btn-primary {
+      background-color: #ffb5fa;
+      border-color: #d816ee;
+      transition: background-color 0.1s ease, border-color 0.3s ease; /* Add transition for color change */
+    }
+
+    .btn-primary:hover {
+      background-color: #00ff04; /* Darker shade of primary color on hover */
+      border-color: #aa00ff;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="success-container">
+    <div class="success-message">
+      <h1>Booking Successful!</h1>
+      <p>Your payment has been processed successfully, Booking ID:  <span id="insertedId"></span></p>
+      <p>Thank you for booking train tickets with us.</p>
+     
+    <a href="/FRONTEND/public/home.html" class="btn btn-primary btn-lg btn-center">GO TO Home</a>
+ 
+  <div class="final animated flip">
+    <h2>Indian Railway Ticket</h2>
+    <div class="ticket" id="ticket">
+      <div class="ticket-details">
+        <label>Date:</label>
+        <span id="date"></span>
+      </div>
+      <div class="ticket-details">
+        <label>departureTime:</label>
+        <span id="departureTime"></span>
+      </div>
+      <div class="ticket-details">
+        <label>Train Number:</label>
+        <span id="ticketNumber"></span> 
+      </div>
+      <div class="ticket-details">
+        <label>Train Name:</label>
+        <span id="trainName"></span>
+      </div>
+      <div class="ticket-details">
+        <label>From:</label>
+        <span id="From"></span>
+      </div>
+      <div class="ticket-details">
+        <label>To:</label>
+        <span id="To"></span>
+      </div>
+      <div class="ticket-details">
+        <label>Seat No:</label>
+        <span id="seatNumber"></span>
+      </div>
+      <div class="ticket-details">
+        <label>amount:</label>
+       <h3> <span id="price"></span></h3>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 barcode">
+          <canvas id="barcodeCanvas"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+  <!-- Bootstrap and additional scripts if needed -->
+
+  <script>
+   // Retrieve ticket details from local storage
+const ticketDetails = JSON.parse(localStorage.getItem('ticketDetails'));
+
+// Parse URL to get query parameters
+const urlParams = new URLSearchParams(window.location.search);
+const insertedId = urlParams.get('insertedId');
+
+if (ticketDetails) {
+  // Populate ticket details
+  document.getElementById('date').innerText = new Date().toLocaleDateString();
+  document.getElementById('ticketNumber').innerText = ticketDetails.trainNumber;
+  document.getElementById('trainName').innerText = ticketDetails.trainName; // Replace with actual train name
+  document.getElementById('From').innerText = ticketDetails.departureStation;
+  document.getElementById('To').innerText = ticketDetails.arrivalStation;
+  document.getElementById('seatNumber').innerText = ticketDetails.seatNumber;
+  document.getElementById('departureTime').innerText = ticketDetails.departureTime;
+  document.getElementById('price').innerText = ticketDetails.price;
+
+  // Generate the barcode
+  JsBarcode('#barcodeCanvas', ticketDetails.trainNumber, {
+    format: 'CODE128', // You can change the format as needed
+    width: 2,
+    height: 50,
+    displayValue: false
+  });
+} else {
+  // Handle case where ticket details are not found
+  const ticketDetailsContainer = document.getElementById('ticket');
+  ticketDetailsContainer.innerHTML = '<p>No ticket details found.</p>';
+}
+
+if (insertedId) {
+  // Display the inserted ID in the success message
+  document.getElementById('insertedId').innerText = insertedId;
+} else {
+  // Handle case where inserted ID is not found
+  document.getElementById('insertedId').innerText = '71';
+}
+
+     
+  </script>
+   
+</body>
+</html>

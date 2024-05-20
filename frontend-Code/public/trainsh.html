@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fetch Data from MySQL</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      border-radius: 6px;
+      border: 5px solid #0022ff;
+    }
+
+    #dataContainer {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #e9e9e9;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="color: #0022ff; text-align: center;">View Train Schedules</h1>
+
+  <div id="dataContainer"></div>
+
+  <script>
+    const dataContainer = document.getElementById('dataContainer');
+
+    // Function to fetch and display data
+    const fetchData = () => {
+      fetch('http://localhost:3000/api/data')
+        .then(response => response.json())
+        .then(data => {
+          console.log('Data received:', data); // Log the received data
+
+          // Clear previous content
+          dataContainer.innerHTML = '';
+
+          // Create a table to display the data
+          const table = document.createElement('table');
+          table.border = '1';
+          table.style.borderCollapse = 'collapse';
+
+          // Create table header
+          const headerRow = table.insertRow();
+          for (const key in data[0]) {
+            if (data[0].hasOwnProperty(key)) {
+              const headerCell = document.createElement('th');
+              headerCell.textContent = key;
+              headerRow.appendChild(headerCell);
+            }
+          }
+
+          // Create table body with data rows
+          data.forEach(item => {
+            const dataRow = table.insertRow();
+            for (const key in item) {
+              if (item.hasOwnProperty(key)) {
+                const dataCell = dataRow.insertCell();
+                dataCell.textContent = item[key];
+              }
+            }
+          });
+
+          // Append the table to the dataContainer
+          dataContainer.appendChild(table);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    };
+
+    // Call the fetchData function when the page loads
+    fetchData();
+  </script>
+</body>
+</html>

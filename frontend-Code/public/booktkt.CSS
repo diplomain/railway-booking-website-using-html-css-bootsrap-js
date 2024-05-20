@@ -1,0 +1,24 @@
+ 
+    body {
+      padding: 20px;
+      border-radius: 6px;
+      border: 5px solid #4400ff;
+      
+    }
+    h1 {
+      color: blue;
+    }
+    /* Smaller width and height for form elements */
+    .form-control {
+      width: 100% !important; /* Adjust width */
+      height: 20% !important; /* Adjust height */
+      font-size: 14px; /* Adjust font size */
+
+    }
+    /* Smaller width for the submit button */
+    .btn-primary {
+      width: 120px; /* Adjust button width */
+      height: 30px; /* Adjust button height */
+      font-size: 14px; /* Adjust button font size */
+    }
+  

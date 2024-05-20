@@ -1,0 +1,116 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar-brand {
+      font-weight: bold;
+      color: #fafafa !important; /* Change navbar brand color to white */
+    }
+    .navbar-nav .nav-item .nav-link:hover {
+      color: #f2f2f2 !important; /* Change navbar links color on hover */
+    }
+    .navbar-nav .nav-item .nav-link {
+      color: #e7e7e7 !important; /* Change navbar links color to white */
+    }
+
+    .navbar {
+      background-color: #7d91ff; /* Dark background color for navbar */
+    }
+    .nav-link:hover {
+      background-color: #0033fe;
+    }
+  
+
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  button {
+    padding: 12px;
+    border-radius: 6px;
+    border: 2px solid #000000;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #4457e2;
+  }
+
+  #trainLocation {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+   
+    h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    animation: colorChange 2s infinite alternate; /* Apply the animation to h1 element */
+  }
+  .navbar-nav{
+    
+    margin-bottom: 20px;
+    animation: colorChange 2s infinite alternate; /* Apply the animation to h1 element */
+  }
+
+  @keyframes colorChange {
+    from { 
+        
+      color: #da0c0c; /* Initial color */
+    }
+    to {
+        
+      color: #0015ff; /* Final color */
+    }
+  }
+
+    .card {
+      border: none; /* Remove border from cards */
+      border-radius: 10px;
+      transition: transform 0.1s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px); /* Move cards up slightly on hover */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow on hover */
+    }
+
+    .footer {
+      background-color: #343a40;
+      color: #ff1919;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    /* Styles for Font Awesome icons */
+    .icon {
+      font-size: 24px; /* Adjust icon size */
+      margin-right: 10px; /* Add space between icon and text */
+    }

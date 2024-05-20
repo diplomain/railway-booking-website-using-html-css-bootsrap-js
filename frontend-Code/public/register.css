@@ -1,0 +1,32 @@
+ 
+    body {
+      background-color: #f8f9fa; /* Light gray background color */
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    .img-fluid {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .form-group {
+      margin-bottom: 20px; /* Add margin below form inputs */
+    }
+
+    .btn-primary {
+      background-color: #8381ff; /* Primary button color */
+      border-color: #00ff04; /* Primary button border color */
+    }
+
+    .btn-primary:hover {
+      background-color: #55d264; /* Darker shade of primary color on hover */
+      border-color: #b30000; /* Darker shade of primary border color on hover */
+    }
+
+    .alert {
+      margin-top: 20px; /* Add margin above alerts */
+    }
+  

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirm_ticket website Railway Home Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="home2.css">
+   
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#" >Confrim_TKT_Railway</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fas fa-home icon"></i> Home</a>
+          </li>
+           
+          <li class="nav-item">
+            <a class="nav-link" href="/FRONTEND/public/login.html"><i class="fas fa-sign-in-alt icon"></i> Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/FRONTEND/public/register.html"><i class="fas fa-user-plus icon"></i> new user? Register Now</a>
+          </li>
+           
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Jumbotron / Hero Section -->
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container text-center">
+      <h1 class="display-4">Welcome to Confrim_TKT_Railway</h1>
+      <p class="lead">Book your train tickets with ease and convenience.</p>
+      <a href="#" onclick="bookNowClicked(event)" class="btn btn-primary btn-lg">Book Now</a>
+      <h6 id="loginError" style="color: rgb(255, 0, 0);background-color: #ffffff; display: none;">Please login to book.</h6>
+    </div>
+  </div>
+
+  <!-- Main Content Section -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Train Schedule</h5>
+            <p class="card-text">View the latest train schedules and routes.</p>
+            <a href="#" class="btn btn-primary">View Schedule</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Ticket Booking</h5>
+            <p class="card-text">Book your train tickets online hassle-free.</p>
+            <a href="#" class="btn btn-primary">Book Tickets</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Customer Support</h5>
+            <p class="card-text">Need assistance? Contact our customer support team.</p>
+            <a href="#" class="btn btn-primary">Contact Support</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <div class="container">
+      &copy; 2024 Railway | All Rights Reserved
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS and any additional scripts go here -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    function bookNowClicked(event) {
+      // Check if user is logged in
+      const isLoggedIn = false; // Replace with actual login status check
+
+      if (!isLoggedIn) {
+        event.preventDefault(); // Prevent default action of the link
+        document.getElementById('loginError').style.display = 'block'; // show error for incurrect  details
+      }
+    }
+  </script>
+</body>
+</html>

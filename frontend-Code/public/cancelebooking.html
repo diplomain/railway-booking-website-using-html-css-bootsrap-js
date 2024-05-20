@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cancel Booking</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      border-radius: 6px;
+      border: 5px solid #0022ff;
+    }
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .btn-primary:hover {
+      background-color: #be00b1; /* Darker shade of primary color on hover */
+      border-color: #000000;
+      border-style: double;
+    }
+    .message {
+      margin-top: 20px;
+      color: #28a745; /* Green color for success message */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="mb-4">Cancel Booking</h2>
+    <form id="cancelForm">
+      <div class="form-group">
+        <label for="bookingId">Booking ID:</label>
+        <input type="text" id="bookingId" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="reason">Reason for Cancellation:</label>
+        <select id="reason" class="form-control" required>
+          <option value="">Select a reason</option>
+          <option value="Change of plans">Change of plans</option>
+          <option value="Traveling on a different date">Traveling on a different date</option>
+          <option value="Unforeseen circumstances">Unforeseen circumstances</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Cancel Booking</button>
+    </form>
+    <div class="message" id="message"></div>
+  </div>
+
+  <!-- Bootstrap JS and Fetch API polyfill (for older browsers) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!--[if IE]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
+  <![endif]-->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cancelForm = document.getElementById('cancelForm');
+      const messageDiv = document.getElementById('message');
+  
+      cancelForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+  
+        const bookingId = document.getElementById('bookingId').value;
+        try {
+          const response = await fetch(`http://localhost:3000/api/bookings/${bookingId}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+          });
+          const data = await response.json();
+          if (response.ok) {
+            messageDiv.textContent = 'Booking canceled successfully "in 24 hours your cash will refound to your bank acoount"';
+            messageDiv.classList.remove('text-danger');
+            messageDiv.classList.add('text-success');
+          } else {
+            messageDiv.textContent = data.message || 'Error canceling booking. Please try again later.';
+            messageDiv.classList.remove('text-success');
+            messageDiv.classList.add('text-danger');
+          }
+        } catch (error) {
+          console.error('Error canceling booking:', error);
+          messageDiv.textContent = 'Error canceling booking. Please try again later.';
+          messageDiv.classList.remove('text-success');
+          messageDiv.classList.add('text-danger');
+        }
+      });
+    });
+  </script>
+  
+</body>
+</html>

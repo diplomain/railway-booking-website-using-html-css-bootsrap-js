@@ -1,0 +1,74 @@
+ 
+    body {
+      color: rgb(38, 38, 42);
+      border: 2px;
+      border-color: rgb(21, 103, 3);
+      border-style: double;
+      background: linear-gradient(to bottom, #8d60ff 0%, #ff8fc7 100%);
+    }
+    .navbar-nav .nav-item .nav-link:hover {
+      color: #59ff30 !important; /* Change navbar links color on hover */
+    }
+    /* Custom styles go here */
+    .container {
+      margin-top: 50px;
+    }
+    .navbar-brand {
+      font-weight: bold;
+      color: #ffffff !important; /* Change navbar brand color to white */
+    }
+    .navbar-nav .nav-item .nav-link {
+      color: #f3f3f3 !important; /* Change navbar links color to white */
+    }
+    .navbar {
+      background-color: #343a40; /* Dark background color for navbar */
+    }
+    .nav-link:hover {
+      background: linear-gradient(to bottom, #8d60ff 0%, #ff8fc7 100%);
+    }
+    @keyframes colorChange {
+      0% {
+        color: #121010;
+      }
+      25% {
+        color: #02ff06;
+      }
+      50% {
+        color: #eaff00;
+      }
+      75% {
+        color: #ffffff;
+      }
+      100% {
+        color: #e7e7e7;
+      }
+    }
+    .animated-color {
+      animation: colorChange 5s infinite;
+    }
+    @keyframes scaleAnimation {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    .animated-scale {
+      animation: scaleAnimation 3s infinite;
+    }
+    @keyframes fadeInAnimation {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    .animated-fade-in {
+      animation: fadeInAnimation 2s ease-in-out;
+    }
+   

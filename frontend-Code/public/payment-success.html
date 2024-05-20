@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Success</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="payment-success.css"> 
+</head>
+<body>
+  <div class="container">
+    <div class="success-message">
+      <h2>Payment Successful!</h2>
+      <p>Your payment has been processed successfully.</p>
+      <p>Thank you for booking train tickets with us.</p>
+    </div>
+    <!-- Payment Details Section -->
+    <div class="payment-details">
+      <h3>Payment Details</h3>
+
+      <p><strong>Transaction ID:</strong> 1234567890</p>
+      <div id="amountDisplay"></div>
+ 
+      <p><strong>Payment Method:</strong> Credit Card</p>
+      <!-- Add more payment details as needed -->
+      <button id="downloadTicketBtn" class="btn btn-success">Download Ticket</button>
+    </div>
+    <!-- Button for Redirect -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <a href="/FRONTEND/public/home.HTML" class="btn btn-primary">GO TO Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Get the amount from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const amount = urlParams.get('amount');
+
+    // Display the amount on the page
+    if (amount) {
+        document.getElementById('amountDisplay').textContent = `Amount Paid: $${amount}`;
+    } else {
+        document.getElementById('amountDisplay').textContent = 'Amount not provided.';
+    }
+    function downloadTicket() {
+    const ticketContent = `
+        Ticket Details:
+        Transaction ID: 1234567890
+        Amount Paid: $${amount}
+        Payment Method: Credit Card
+        // Add more ticket details as needed
+    `;
+    const blob = new Blob([ticketContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'train_ticket.txt'; // Change the filename as needed
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+// Add event listener for download button click
+document.getElementById('downloadTicketBtn').addEventListener('click', downloadTicket);
+  </script>
+</body>
+</html>

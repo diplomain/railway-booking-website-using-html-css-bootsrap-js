@@ -1,0 +1,142 @@
+ 
+    /* Custom styles */
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #8d60ff 0%, #ff8fc7 100%);
+    }
+    .navbar-brand {
+      font-weight: bold;
+      color: #ffffff !important; /* Change navbar brand color to white */
+      font-size: 1.5rem; /* Increase font size */
+      text-transform: uppercase; /* Convert text to uppercase */
+    }
+
+    .navbar-nav .nav-item .nav-link {
+      color: #ffffff !important; /* Change navbar links color to white */
+      font-size: 1rem; /* Set font size for navbar links */
+      padding: 10px 15px; /* Adjust padding for navbar links */
+    }
+
+    .navbar {
+      background-color: #343a40; /* Dark background color for navbar */
+      border-bottom: 4px solid #d816ee; /* Bottom border color */
+    }
+
+    .navbar-toggler-icon {
+      background-color: #ffffff; /* Toggler icon color */
+    }
+
+    .navbar-collapse {
+      justify-content: flex-end; /* Align navbar links to the right */
+    }
+
+    .nav-link:hover {
+      background: linear-gradient(to bottom, #8d60ff 0%, #ff8fc7 100%);
+    }
+
+    .jumbotron {
+      background-image: url('/FRONTEND/public/conf.png');
+      background-size: cover;
+      color: #ffffff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+      padding-top: 100px; /* Adjust padding for jumbotron */
+      padding-bottom: 100px; /* Adjust padding for jumbotron */
+      border-radius: 6px;
+      border: 5px solid #fa0af6;
+    }
+
+    .jumbotron h1,
+    .jumbotron p {
+      color: inherit; /* Inherit text color from parent (.jumbotron) */
+      animation: colorChange 3s infinite alternate; /* Add animation to h1 element */
+    }
+
+    @keyframes colorChange {
+      from {
+        color: #d900ff; /* Initial color */
+      }
+      to {
+        color: #00ff3c; /* Final color */
+      }
+    }
+
+    .navbar-nav .nav-item .nav-link:hover {
+      color: #59ff30 !important; /* Change navbar links color on hover */
+    }
+    .btn-primary {
+      background-color: #4ef83f;
+      border-color: #d816ee;
+      transition: background-color 0.1s ease, border-color 0.3s ease; /* Add transition for color change */
+    }
+
+    .btn-primary:hover {
+      background-color: #ff00d4; /* Darker shade of primary color on hover */
+      border-color: #aa00ff;
+    }
+
+    .card {
+      border: 1px solid #dcdcdc;
+      border-radius: 5px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer {
+      background-color: #343a40;
+      color: #ffffff;
+      padding: 20px 0;
+    }
+
+    /* Styles for Font Awesome icons */
+    .icon {
+      font-size: 24px; /* Adjust icon size */
+      margin-right: 5px; /* Add space between icon and text */
+    }
+
+   /* Center the "Book Now" button */
+.btn-center {
+  display: block;
+  margin: 0 auto; /* Center horizontally */
+  width: 150px; /* Set the desired width */
+}
+/* Custom styles for account icon */
+#accountIcon {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  cursor: pointer;
+  font-size: 30px;
+  color: #ffffff; /* Change icon color as needed */
+}
+
+/* Styling for user details card */
+#userDetails {
+position: fixed;
+top: 60px; /* Adjust distance from top as needed */
+left: 20px;
+z-index: 900;
+display: none;
+width: 300px; /* Adjust card width as needed */
+background-color: #dddddd;
+box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+padding: 20px;
+border-radius: 50%; /* Make it circular */
+}
+
+#userDetails p {
+margin: 10px 0;
+}
+
+
+/* Styling for user details text */
+#userDetailsText{
+  font-size: 30px;
+}
+.carousel-item img {
+  max-height: 500px; /* Adjust the max-height as needed */
+  object-fit: cover; /* Ensures the image covers the whole area */
+}
